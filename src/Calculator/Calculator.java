@@ -1,5 +1,7 @@
 package Calculator;
+
 import java.util.*;
+
 public class Calculator {
     public static final Map<Character,Integer> mark_cal = Map.of('+',1,'-',1,'*',2,'/',2);
     public static List<String> change_cal(String expression){
@@ -8,7 +10,7 @@ public class Calculator {
         StringBuilder number = new StringBuilder(); //memorize number
 
         for (char ch : expression.toCharArray()){
-            if (Character.isDigit(ch)){
+            if (Character.isDigit(ch)|| ch =='.'){
                 number.append(ch);
             }else{
                 if (number.length()>0){
@@ -29,24 +31,27 @@ public class Calculator {
                     operator.push(ch);
                 }
             }
+
         }
+
         if (number.length()>0){
             output.add(number.toString());
         }
         while (!operator.isEmpty()){
             output.add(String.valueOf(operator.pop()));
         }
+
         return output;
     }
-    public static int evaluatePostfix(List<String> postfix) {
-        Stack<Integer> stack = new Stack<>();
+    public static double evaluate(List<String> postfix) {
+        Stack<Double> stack = new Stack<>();
 
         for (String token : postfix) {
-            if (token.matches("\\d+")) {
-                stack.push(Integer.parseInt(token));
+            if (token.matches("\\d+(\\.\\d+)?")) {
+                stack.push(Double.parseDouble(token));
             } else {
-                int b = stack.pop();
-                int a = stack.pop();
+                double b = stack.pop();
+                double a = stack.pop();
                 switch (token.charAt(0)) {
                     case '+': stack.push(a + b); break;
                     case '-': stack.push(a - b); break;
@@ -57,8 +62,8 @@ public class Calculator {
         }
         return stack.pop();
     }
-    public static int calculate(String expression) {
+    public static double calculate(String expression) {
         List<String> postfix = change_cal(expression.replaceAll("\\s+", ""));
-        return evaluatePostfix(postfix);
+        return evaluate(postfix);
     }
 }
