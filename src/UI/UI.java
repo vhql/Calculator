@@ -11,7 +11,8 @@ public class UI {
     }
 
     public void message() {
-        System.out.print("계산식을 입력하세요: ");
+        System.out.print("계산식을 입력하세요: \n");
+        System.out.print("종료시엔 b를 입력하세요 \n");
     }
     public String inputExpression() {
         return scanner.nextLine();

@@ -16,8 +16,13 @@ public class Main {
                 System.out.println("계산기 종료");
                 break;
             }
-            double result = Calculator.calculate(expression);
-            ui.outputExpression(result);
+            try {
+                double result = Calculator.calculate(expression);
+                ui.outputExpression(result);
+            }
+            catch (ArithmeticException e){
+                System.out.println(e.getMessage());
+            }
         }
         ui.closeScanner();
     }
