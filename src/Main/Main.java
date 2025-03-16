@@ -64,9 +64,7 @@ public class Main {
                             break;
                         default :
                             try{
-                                if(true){
                                 throw new WrongInputException("Wrong Input : " + UserFlag);
-                                }
                             }
                             catch (WrongInputException e){
                                 System.out.println(e.getMessage());
